@@ -16,22 +16,22 @@ import com.fullstack.backend.Entity.Department;
 import com.fullstack.backend.ServiceLayer.DepartmentService;
 
 @RestController
-@RequestMapping("/api/v1/departments")
+@RequestMapping("/api/v1/")
 public class DepartmentController {
     
     
     @Autowired
     private DepartmentService departmentService;
 
-    @PostMapping
+    @PostMapping("departments")
     public ResponseEntity<Department> createDepartment(@RequestBody Department department) {
         Department createdDepartment = departmentService.createDepartment(department);
         return new ResponseEntity<>(createdDepartment, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{departmentId}")
-    public ResponseEntity<Department> getDepartmentById(@PathVariable Long departmentId) {
-        Department department = departmentService.getDepartmentById(departmentId);
+    @GetMapping("departments/{id}")
+    public ResponseEntity<Department> getDepartmentById(@PathVariable Long id) {
+        Department department = departmentService.getDepartmentById(id);
         if (department != null) {
             return new ResponseEntity<>(department, HttpStatus.OK);
         } else {
@@ -39,15 +39,15 @@ public class DepartmentController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/departments")
     public ResponseEntity<List<Department>> getAllDepartments() {
         List<Department> departments = departmentService.getAllDepartments();
         return new ResponseEntity<>(departments, HttpStatus.OK);
     }
 
-    @PutMapping("/{departmentId}")
-    public ResponseEntity<Department> updateDepartment(@PathVariable Long departmentId, @RequestBody Department updatedDepartment) {
-        Department department = departmentService.updateDepartment(departmentId, updatedDepartment);
+    @PutMapping("departments/{id}")
+    public ResponseEntity<Department> updateDepartment(@PathVariable Long id, @RequestBody Department updatedDepartment) {
+        Department department = departmentService.updateDepartment(id, updatedDepartment);
         if (department != null) {
             return new ResponseEntity<>(department, HttpStatus.OK);
         } else {
@@ -55,9 +55,11 @@ public class DepartmentController {
         }
     }
 
-    @DeleteMapping("/{departmentId}")
-    public ResponseEntity<Void> deleteDepartment(@PathVariable Long departmentId) {
-        departmentService.deleteDepartment(departmentId);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    @DeleteMapping("departments/{id}")
+    public ResponseEntity<String> deleteDepartment(@PathVariable Long id) {
+        departmentService.deleteDepartment(id);
+        return ResponseEntity.ok("Employee deleted successfully");
+	}
     }
-}
+
+

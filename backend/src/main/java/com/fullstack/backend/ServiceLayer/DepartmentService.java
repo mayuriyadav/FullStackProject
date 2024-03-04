@@ -8,12 +8,12 @@ public interface DepartmentService {
 
     Department createDepartment(Department department);
 
-    Department getDepartmentById(Long departmentId);
+    Department getDepartmentById(Long id);
 
     List<Department> getAllDepartments();
 
-    Department updateDepartment(Long departmentId, Department updatedDepartment);
+    Department updateDepartment(Long id, Department updatedDepartment);
 
-    void deleteDepartment(Long departmentId);
+    void deleteDepartment(Long id);
     
 }

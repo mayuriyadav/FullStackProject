@@ -14,10 +14,10 @@ export const getEmployee = (employeesId )=> axios.get(REST_API_BASE_URL + '/' +e
     
 
 
-const BASE_URL = 'http://localhost:9091/api/v1'; // Base URL for your API
+const BASE_URL = "http://localhost:9091/api/v1/employees"; // Base URL for your API
 
 export const updateEmployee = (employeeId, employees) => {
-  const url = `${BASE_URL}/employees/${employeeId}`;
+  const url = `${BASE_URL}/${employeeId}`;
   return axios.put(url, employees);
 };
 

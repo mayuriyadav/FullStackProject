@@ -1,8 +1,6 @@
 package com.fullstack.backend.ServiceLayer;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,9 +20,9 @@ private DepartmentRepo departmentRepo ;
     }
 
     @Override
-    public Department getDepartmentById(Long departmentId) {
-        Department existingDepartment = departmentRepo.findById(departmentId)
-                .orElseThrow(() -> new ResourceNotFoundException("Employee not exist with id :" + departmentId));
+    public Department getDepartmentById(Long id) {
+        Department existingDepartment = departmentRepo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not exist with id :" + id));
 
         return existingDepartment;
     }
@@ -35,13 +33,14 @@ private DepartmentRepo departmentRepo ;
     }
 
     @Override
-    public Department updateDepartment(Long departmentId, Department updatedDepartment) {
-        Department existingDepartment = departmentRepo.findById(departmentId).orElseThrow(() -> new ResourceNotFoundException("Employee not exist with id :" + departmentId));
-        
-            
+    public Department updateDepartment(Long id, Department updatedDepartment) {
+        Department existingDepartment = departmentRepo.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Employee not exist with id :" + id));
+               
             existingDepartment.setDepartmentName(updatedDepartment.getDepartmentName());
             existingDepartment.setDepartmentDescription(updatedDepartment.getDepartmentDescription());
-            return departmentRepo.save(existingDepartment);
+             Department d = departmentRepo.save(existingDepartment);
+             return d ;
         } 
     
 
